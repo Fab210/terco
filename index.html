@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Récitez le chapelet en ligne, méditez les mystères du Rosaire." />
+  <meta name="theme-color" content="#f5efe6" />
+  <title>Le Chapelet — Prier le Rosaire</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main id="app">
+    <!-- Écran d'accueil -->
+    <section id="screen-home" class="screen active">
+      <header class="home-header">
+        <div class="cross-icon" aria-hidden="true">✛</div>
+        <h1>Le Chapelet</h1>
+        <p class="tagline">Prier le Rosaire en méditant les mystères</p>
+      </header>
+
+      <div class="suggested-card" id="suggested-card">
+        <span class="suggested-label">Mystères du jour</span>
+        <h2 id="suggested-title">—</h2>
+        <p id="suggested-day"></p>
+        <button class="btn btn-primary" data-action="start-suggested">Commencer la prière</button>
+      </div>
+
+      <section class="mysteries-grid">
+        <h3>Choisir les mystères</h3>
+        <div class="cards" id="mystery-cards"></div>
+      </section>
+
+      <footer class="home-footer">
+        <p>« Le Rosaire est ma prière préférée. » — Saint Jean-Paul II</p>
+      </footer>
+    </section>
+
+    <!-- Écran de prière -->
+    <section id="screen-prayer" class="screen">
+      <header class="prayer-header">
+        <button class="icon-btn" data-action="back" aria-label="Retour">←</button>
+        <div class="prayer-title">
+          <span id="prayer-mystery-set" class="muted"></span>
+          <h2 id="prayer-step-title">—</h2>
+        </div>
+        <button class="icon-btn" data-action="info" aria-label="Information">ⓘ</button>
+      </header>
+
+      <div class="progress-container">
+        <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+        <span id="progress-text" class="muted small"></span>
+      </div>
+
+      <div class="rosary-visual" id="rosary-visual" aria-hidden="true"></div>
+
+      <article class="prayer-content">
+        <div id="mystery-meditation" class="meditation hidden">
+          <h3 id="meditation-title"></h3>
+          <p id="meditation-fruit" class="fruit"></p>
+          <p id="meditation-text"></p>
+        </div>
+        <div class="prayer-text">
+          <h3 id="prayer-name"></h3>
+          <p id="prayer-body"></p>
+        </div>
+      </article>
+
+      <nav class="prayer-nav">
+        <button class="btn btn-ghost" data-action="prev">Précédent</button>
+        <button class="btn btn-primary" data-action="next">Suivant</button>
+      </nav>
+    </section>
+
+    <!-- Écran de fin -->
+    <section id="screen-end" class="screen">
+      <div class="end-card">
+        <div class="cross-icon big" aria-hidden="true">✛</div>
+        <h2>Chapelet achevé</h2>
+        <p>Que la Vierge Marie vous accompagne dans la paix.</p>
+        <button class="btn btn-primary" data-action="home">Retour à l'accueil</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

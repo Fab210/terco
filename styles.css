@@ -1,0 +1,392 @@
+/* ============================================================
+   Le Chapelet — Style épuré et contemplatif
+   ============================================================ */
+
+:root {
+  --bg: #faf6ef;
+  --bg-soft: #f3ece0;
+  --surface: #ffffff;
+  --ink: #2a2622;
+  --ink-soft: #5a534b;
+  --muted: #8a8278;
+  --line: #e6ddcd;
+  --accent: #8a6a3b;
+  --accent-soft: #c9a86b;
+  --accent-ink: #ffffff;
+  --shadow: 0 4px 24px rgba(50, 35, 15, 0.08);
+  --radius-lg: 22px;
+  --radius-md: 14px;
+  --radius-sm: 10px;
+  --bead: #c9a86b;
+  --bead-done: #8a6a3b;
+  --bead-pater: #2a2622;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 10% 0%, #fff8eb 0%, transparent 40%),
+    radial-gradient(circle at 90% 100%, #f0e6d2 0%, transparent 50%),
+    var(--bg);
+}
+
+#app {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1.25rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ----- Écrans / navigation ----- */
+.screen { display: none; flex: 1; flex-direction: column; }
+.screen.active { display: flex; animation: fade 0.35s ease; }
+
+@keyframes fade {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ----- Accueil ----- */
+.home-header {
+  text-align: center;
+  padding: 2.5rem 1rem 1.5rem;
+}
+.cross-icon {
+  font-size: 2rem;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+.cross-icon.big { font-size: 3.5rem; }
+
+.home-header h1 {
+  font-size: 2.25rem;
+  margin: 0.25rem 0;
+  letter-spacing: 0.02em;
+  font-weight: 500;
+}
+.tagline {
+  color: var(--ink-soft);
+  font-style: italic;
+  margin: 0;
+}
+
+.suggested-card {
+  background: linear-gradient(135deg, #fff 0%, #fbf3e2 100%);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem 1.5rem;
+  margin: 1rem 0 2rem;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+.suggested-label {
+  display: inline-block;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.suggested-card h2 {
+  font-size: 1.6rem;
+  margin: 0.25rem 0 0.5rem;
+  font-weight: 500;
+}
+.suggested-card p {
+  color: var(--ink-soft);
+  margin: 0 0 1.25rem;
+}
+
+.mysteries-grid h3 {
+  font-size: 0.92rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+  margin: 1rem 0 0.75rem;
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.75rem;
+}
+.mystery-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  color: var(--ink);
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+.mystery-card:hover, .mystery-card:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+  outline: none;
+}
+.mystery-card .icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+.mystery-card .name {
+  font-weight: 500;
+  font-size: 1rem;
+  margin: 0;
+}
+.mystery-card .days {
+  color: var(--muted);
+  font-size: 0.82rem;
+  margin: 0.25rem 0 0;
+}
+
+.home-footer {
+  margin-top: auto;
+  padding: 2rem 1rem 1rem;
+  text-align: center;
+  color: var(--muted);
+  font-style: italic;
+  font-size: 0.92rem;
+}
+
+/* ----- Boutons ----- */
+.btn {
+  border: none;
+  border-radius: 999px;
+  padding: 0.85rem 1.6rem;
+  font: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.1s ease, background 0.2s ease, opacity 0.2s ease;
+  letter-spacing: 0.01em;
+}
+.btn-primary {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+.btn-primary:hover { background: #6f5630; }
+.btn-primary:active { transform: scale(0.98); }
+.btn-ghost {
+  background: transparent;
+  color: var(--ink-soft);
+  border: 1px solid var(--line);
+}
+.btn-ghost:hover { background: var(--bg-soft); }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.icon-btn {
+  background: transparent;
+  border: 1px solid var(--line);
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: var(--ink-soft);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease;
+}
+.icon-btn:hover { background: var(--bg-soft); }
+
+/* ----- Écran de prière ----- */
+.prayer-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0 1rem;
+}
+.prayer-title {
+  flex: 1;
+  text-align: center;
+}
+.prayer-title h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+.muted { color: var(--muted); }
+.muted.small { font-size: 0.85rem; }
+#prayer-mystery-set {
+  display: block;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.progress-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.progress-bar {
+  flex: 1;
+  height: 4px;
+  background: var(--line);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--accent);
+  width: 0%;
+  transition: width 0.35s ease;
+}
+
+/* ----- Visualisation du chapelet ----- */
+.rosary-visual {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  margin: 0.5rem auto 1.5rem;
+  max-width: 100%;
+  padding: 0.5rem;
+}
+.bead {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--line);
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+.bead.ave { background: var(--bead); opacity: 0.4; }
+.bead.pater { background: var(--bead-pater); opacity: 0.5; width: 16px; height: 16px; }
+.bead.done { opacity: 1; background: var(--bead-done); }
+.bead.current {
+  transform: scale(1.6);
+  box-shadow: 0 0 0 4px rgba(138, 106, 59, 0.18);
+  background: var(--accent-soft);
+  opacity: 1;
+}
+.bead.spacer { background: transparent; width: 4px; }
+
+/* ----- Contenu de la prière ----- */
+.prayer-content {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem 1.5rem;
+  box-shadow: var(--shadow);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.meditation {
+  border-left: 3px solid var(--accent-soft);
+  padding: 0.25rem 0 0.25rem 1rem;
+  background: linear-gradient(90deg, rgba(201,168,107,0.08) 0%, transparent 100%);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+.meditation.hidden { display: none; }
+.meditation h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.15rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+.meditation .fruit {
+  font-style: italic;
+  color: var(--ink-soft);
+  margin: 0 0 0.5rem;
+  font-size: 0.92rem;
+}
+.meditation p:last-child {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+.prayer-text h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+}
+.prayer-text p {
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.75;
+  color: var(--ink);
+}
+
+.prayer-nav {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+.prayer-nav .btn { flex: 1; }
+
+/* ----- Écran de fin ----- */
+.end-card {
+  margin: auto;
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem 2rem;
+  box-shadow: var(--shadow);
+  max-width: 420px;
+}
+.end-card h2 {
+  font-weight: 500;
+  margin: 0.75rem 0 0.5rem;
+}
+.end-card p {
+  color: var(--ink-soft);
+  margin: 0 0 1.5rem;
+}
+
+/* ----- Responsive ----- */
+@media (max-width: 480px) {
+  #app { padding: 0.75rem; }
+  .home-header { padding: 1.5rem 0.5rem 1rem; }
+  .home-header h1 { font-size: 1.85rem; }
+  .suggested-card { padding: 1.25rem 1rem; }
+  .prayer-content { padding: 1.25rem 1rem; }
+  .prayer-text p { font-size: 1.05rem; }
+  .bead { width: 12px; height: 12px; }
+  .bead.pater { width: 14px; height: 14px; }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1a1612;
+    --bg-soft: #221d17;
+    --surface: #25201a;
+    --ink: #ece4d3;
+    --ink-soft: #b9b0a0;
+    --muted: #8a8278;
+    --line: #3a322a;
+    --accent: #d4b27a;
+    --accent-soft: #c9a86b;
+    --accent-ink: #1a1612;
+    --shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+    --bead-pater: #ece4d3;
+  }
+  body {
+    background:
+      radial-gradient(circle at 10% 0%, #2a221a 0%, transparent 40%),
+      radial-gradient(circle at 90% 100%, #1f1a14 0%, transparent 50%),
+      var(--bg);
+  }
+}
