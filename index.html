@@ -4,16 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Récitez le chapelet en ligne, méditez les mystères du Rosaire." />
-  <meta name="theme-color" content="#f5efe6" />
+  <meta name="theme-color" content="#0d1b3e" />
   <title>Le Chapelet — Prier le Rosaire</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <main id="app">
-    <!-- Écran d'accueil -->
+
+    <!-- ═══ ACCUEIL ═══ -->
     <section id="screen-home" class="screen active">
       <header class="home-header">
-        <div class="cross-icon" aria-hidden="true">✛</div>
+        <div class="cross-icon">✛</div>
         <h1>Le Chapelet</h1>
         <p class="tagline">Prier le Rosaire en méditant les mystères</p>
       </header>
@@ -35,51 +36,53 @@
       </footer>
     </section>
 
-    <!-- Écran de prière -->
+    <!-- ═══ PRIÈRE ═══ -->
     <section id="screen-prayer" class="screen">
+
       <header class="prayer-header">
         <button class="icon-btn" data-action="back" aria-label="Retour">←</button>
-        <div class="prayer-title">
-          <span id="prayer-mystery-set" class="muted"></span>
-          <h2 id="prayer-step-title">—</h2>
+        <div class="prayer-title-wrap">
+          <span id="prayer-mystery-set" class="mystery-label"></span>
+          <span id="prayer-step-title" class="step-label"></span>
         </div>
-        <button class="icon-btn" data-action="info" aria-label="Information">ⓘ</button>
+        <button class="icon-btn" data-action="info" aria-label="Méditation">✦</button>
       </header>
 
-      <div class="progress-container">
-        <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
-        <span id="progress-text" class="muted small"></span>
-      </div>
+      <!-- Rosaire SVG généré par JS -->
+      <div id="rosary-stage" class="rosary-stage" aria-hidden="true"></div>
 
-      <div class="rosary-visual" id="rosary-visual" aria-hidden="true"></div>
-
-      <article class="prayer-content">
+      <!-- Texte de la prière -->
+      <div class="prayer-card">
         <div id="mystery-meditation" class="meditation hidden">
-          <h3 id="meditation-title"></h3>
-          <p id="meditation-fruit" class="fruit"></p>
-          <p id="meditation-text"></p>
+          <span id="meditation-title" class="mystery-title-inline"></span>
+          <span id="meditation-fruit" class="fruit-inline"></span>
         </div>
-        <div class="prayer-text">
-          <h3 id="prayer-name"></h3>
+        <div class="prayer-text-block">
+          <p id="prayer-name" class="prayer-label"></p>
           <p id="prayer-body"></p>
         </div>
-      </article>
+      </div>
 
       <nav class="prayer-nav">
-        <button class="btn btn-ghost" data-action="prev">Précédent</button>
-        <button class="btn btn-primary" data-action="next">Suivant</button>
+        <button class="nav-arrow" data-action="prev" aria-label="Précédent">&#9664;</button>
+        <div class="nav-center">
+          <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+          <span id="progress-text" class="progress-text"></span>
+        </div>
+        <button class="nav-arrow nav-next" data-action="next" aria-label="Suivant">&#9654;</button>
       </nav>
     </section>
 
-    <!-- Écran de fin -->
+    <!-- ═══ FIN ═══ -->
     <section id="screen-end" class="screen">
       <div class="end-card">
-        <div class="cross-icon big" aria-hidden="true">✛</div>
+        <div class="cross-icon big">✛</div>
         <h2>Chapelet achevé</h2>
         <p>Que la Vierge Marie vous accompagne dans la paix.</p>
         <button class="btn btn-primary" data-action="home">Retour à l'accueil</button>
       </div>
     </section>
+
   </main>
 
   <script src="data.js"></script>
