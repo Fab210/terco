@@ -24,18 +24,21 @@
 
 * { box-sizing: border-box; }
 
-html, body {
+html {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
   margin: 0;
   padding: 0;
+  height: 100%;
+  overflow: hidden;
   font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
   background: var(--bg);
   color: var(--ink);
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
-}
-
-body {
-  min-height: 100vh;
   background:
     radial-gradient(circle at 10% 0%, #fff8eb 0%, transparent 40%),
     radial-gradient(circle at 90% 100%, #f0e6d2 0%, transparent 50%),
@@ -46,13 +49,21 @@ body {
   max-width: 720px;
   margin: 0 auto;
   padding: 1.25rem;
-  min-height: 100vh;
+  height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
-/* ----- Écrans / navigation ----- */
-.screen { display: none; flex: 1; flex-direction: column; }
+/* ----- Screens ----- */
+.screen {
+  display: none;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
 .screen.active { display: flex; animation: fade 0.35s ease; }
 
 @keyframes fade {
@@ -60,10 +71,17 @@ body {
   to   { opacity: 1; transform: none; }
 }
 
-/* ----- Accueil ----- */
+/* ===== HOME SCREEN ===== */
+
+#screen-home {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 .home-header {
+  flex-shrink: 0;
   text-align: center;
-  padding: 2.5rem 1rem 1.5rem;
+  padding: 1.75rem 1rem 1rem;
 }
 .cross-icon {
   font-size: 2rem;
@@ -85,11 +103,12 @@ body {
 }
 
 .suggested-card {
+  flex-shrink: 0;
   background: linear-gradient(135deg, #fff 0%, #fbf3e2 100%);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  padding: 1.75rem 1.5rem;
-  margin: 1rem 0 2rem;
+  padding: 1.5rem 1.25rem;
+  margin: 0.75rem 0 1rem;
   box-shadow: var(--shadow);
   text-align: center;
 }
@@ -100,41 +119,47 @@ body {
   text-transform: uppercase;
   color: var(--accent);
   font-weight: 600;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
 }
 .suggested-card h2 {
-  font-size: 1.6rem;
-  margin: 0.25rem 0 0.5rem;
+  font-size: 1.5rem;
+  margin: 0.25rem 0 0.4rem;
   font-weight: 500;
 }
 .suggested-card p {
   color: var(--ink-soft);
-  margin: 0 0 1.25rem;
+  margin: 0 0 1rem;
+  font-size: 0.92rem;
 }
 
+.mysteries-grid {
+  flex: 1;
+  min-height: 0;
+}
 .mysteries-grid h3 {
   font-size: 0.92rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--muted);
   font-weight: 600;
-  margin: 1rem 0 0.75rem;
+  margin: 0 0 0.65rem;
 }
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.65rem;
 }
 .mystery-card {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
-  padding: 1rem;
+  padding: 0.85rem 0.75rem;
   cursor: pointer;
   text-align: left;
   font: inherit;
   color: var(--ink);
   transition: transform 0.15s ease, box-shadow 0.2s ease;
+  min-height: 44px;
 }
 .mystery-card:hover, .mystery-card:focus-visible {
   transform: translateY(-2px);
@@ -142,31 +167,31 @@ body {
   outline: none;
 }
 .mystery-card .icon {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.4rem;
+  margin-bottom: 0.35rem;
   display: block;
 }
 .mystery-card .name {
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 0.9rem;
   margin: 0;
 }
 .mystery-card .days {
   color: var(--muted);
-  font-size: 0.82rem;
-  margin: 0.25rem 0 0;
+  font-size: 0.78rem;
+  margin: 0.2rem 0 0;
 }
 
 .home-footer {
-  margin-top: auto;
-  padding: 2rem 1rem 1rem;
+  flex-shrink: 0;
+  padding: 0.65rem 1rem 0.25rem;
   text-align: center;
   color: var(--muted);
   font-style: italic;
-  font-size: 0.92rem;
+  font-size: 0.88rem;
 }
 
-/* ----- Boutons ----- */
+/* ===== BUTTONS ===== */
 .btn {
   border: none;
   border-radius: 999px;
@@ -176,6 +201,7 @@ body {
   cursor: pointer;
   transition: transform 0.1s ease, background 0.2s ease, opacity 0.2s ease;
   letter-spacing: 0.01em;
+  min-height: 44px;
 }
 .btn-primary {
   background: var(--accent);
@@ -194,7 +220,8 @@ body {
 .icon-btn {
   background: transparent;
   border: 1px solid var(--line);
-  width: 40px; height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   cursor: pointer;
   font-size: 1.2rem;
@@ -203,39 +230,47 @@ body {
   align-items: center;
   justify-content: center;
   transition: background 0.15s ease;
+  flex-shrink: 0;
 }
 .icon-btn:hover { background: var(--bg-soft); }
 
-/* ----- Écran de prière ----- */
+/* ===== PRAYER SCREEN ===== */
+
 .prayer-header {
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.5rem 0 1rem;
+  padding: 0.25rem 0 0.65rem;
 }
 .prayer-title {
   flex: 1;
   text-align: center;
+  min-width: 0;
 }
 .prayer-title h2 {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .muted { color: var(--muted); }
 .muted.small { font-size: 0.85rem; }
 #prayer-mystery-set {
   display: block;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
 }
 
 .progress-container {
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.65rem;
 }
 .progress-bar {
   flex: 1;
@@ -251,24 +286,28 @@ body {
   transition: width 0.35s ease;
 }
 
-/* ----- Visualisation du chapelet ----- */
+/* ===== ROSARY VISUAL ===== */
+
 .rosary-visual {
+  flex-shrink: 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 6px;
-  margin: 0.5rem auto 1.5rem;
+  gap: 5px;
+  margin: 0 auto 0.65rem;
   max-width: 100%;
-  padding: 0.5rem;
+  padding: 0.3rem;
 }
 .bead {
-  width: 14px; height: 14px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   background: var(--line);
   transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  flex-shrink: 0;
 }
-.bead.ave { background: var(--bead); opacity: 0.4; }
-.bead.pater { background: var(--bead-pater); opacity: 0.5; width: 16px; height: 16px; }
+.bead.ave  { background: var(--bead);       opacity: 0.4; }
+.bead.pater{ background: var(--bead-pater); opacity: 0.5; width: 14px; height: 14px; }
 .bead.done { opacity: 1; background: var(--bead-done); }
 .bead.current {
   transform: scale(1.6);
@@ -278,19 +317,24 @@ body {
 }
 .bead.spacer { background: transparent; width: 4px; }
 
-/* ----- Contenu de la prière ----- */
+/* ===== PRAYER CONTENT ===== */
+
 .prayer-content {
+  flex: 1;
+  min-height: 0;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  padding: 1.75rem 1.5rem;
+  padding: 1.25rem 1.25rem;
   box-shadow: var(--shadow);
-  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.75rem;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 .meditation {
+  flex-shrink: 0;
   border-left: 3px solid var(--accent-soft);
   padding: 0.25rem 0 0.25rem 1rem;
   background: linear-gradient(90deg, rgba(201,168,107,0.08) 0%, transparent 100%);
@@ -299,24 +343,25 @@ body {
 .meditation.hidden { display: none; }
 .meditation h3 {
   margin: 0 0 0.25rem;
-  font-size: 1.15rem;
+  font-size: 1rem;
   color: var(--accent);
   font-weight: 600;
 }
 .meditation .fruit {
   font-style: italic;
   color: var(--ink-soft);
-  margin: 0 0 0.5rem;
-  font-size: 0.92rem;
+  margin: 0 0 0.4rem;
+  font-size: 0.88rem;
 }
 .meditation p:last-child {
   margin: 0;
   color: var(--ink-soft);
+  font-size: 0.9rem;
 }
 
 .prayer-text h3 {
-  margin: 0 0 0.5rem;
-  font-size: 1rem;
+  margin: 0 0 0.4rem;
+  font-size: 0.88rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--muted);
@@ -324,19 +369,23 @@ body {
 }
 .prayer-text p {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 1rem;
   line-height: 1.75;
   color: var(--ink);
 }
 
+/* ===== PRAYER NAV ===== */
+
 .prayer-nav {
+  flex-shrink: 0;
   display: flex;
   gap: 0.75rem;
-  margin-top: 1.25rem;
+  margin-top: 0.65rem;
 }
 .prayer-nav .btn { flex: 1; }
 
-/* ----- Écran de fin ----- */
+/* ===== END SCREEN ===== */
+
 .end-card {
   margin: auto;
   text-align: center;
@@ -356,17 +405,166 @@ body {
   margin: 0 0 1.5rem;
 }
 
-/* ----- Responsive ----- */
+/* ===== MOBILE — 480 px and below (e.g. iPhone SE 375 px) ===== */
+
 @media (max-width: 480px) {
-  #app { padding: 0.75rem; }
-  .home-header { padding: 1.5rem 0.5rem 1rem; }
-  .home-header h1 { font-size: 1.85rem; }
-  .suggested-card { padding: 1.25rem 1rem; }
-  .prayer-content { padding: 1.25rem 1rem; }
-  .prayer-text p { font-size: 1.05rem; }
-  .bead { width: 12px; height: 12px; }
-  .bead.pater { width: 14px; height: 14px; }
+  #app { padding: 0.5rem 0.7rem; }
+
+  /* Home */
+  .home-header      { padding: 0.6rem 0.5rem 0.5rem; }
+  .home-header h1   { font-size: 1.65rem; }
+  .cross-icon       { font-size: 1.4rem; margin-bottom: 0.25rem; }
+  .tagline          { font-size: 0.84rem; }
+
+  .suggested-card   { padding: 0.85rem 0.9rem; margin: 0.5rem 0 0.75rem; border-radius: var(--radius-md); }
+  .suggested-card h2{ font-size: 1.15rem; }
+  .suggested-label  { font-size: 0.7rem; }
+  .suggested-card p { font-size: 0.82rem; margin-bottom: 0.75rem; }
+
+  .mysteries-grid h3{ font-size: 0.78rem; margin-bottom: 0.5rem; }
+  .cards            { grid-template-columns: repeat(2, 1fr); gap: 0.45rem; }
+  .mystery-card     { padding: 0.6rem 0.55rem; }
+  .mystery-card .icon { font-size: 1.15rem; margin-bottom: 0.25rem; }
+  .mystery-card .name { font-size: 0.82rem; }
+  .mystery-card .days { font-size: 0.7rem; }
+
+  .home-footer { font-size: 0.75rem; padding: 0.4rem 0.5rem 0; }
+
+  /* Prayer screen */
+  .prayer-header    { padding: 0.2rem 0 0.45rem; gap: 0.4rem; }
+  .prayer-title h2  { font-size: 0.92rem; }
+  #prayer-mystery-set { font-size: 0.64rem; }
+
+  .progress-container { margin-bottom: 0.45rem; }
+  .muted.small      { font-size: 0.76rem; }
+
+  /* Shrink beads so all 60 fit in ~3 rows within ~50 px */
+  .rosary-visual    { gap: 4px; margin-bottom: 0.45rem; padding: 0.2rem; }
+  .bead             { width: 9px;  height: 9px; }
+  .bead.pater       { width: 11px; height: 11px; }
+
+  .prayer-content   { padding: 0.75rem 0.85rem; gap: 0.5rem; border-radius: var(--radius-md); }
+  .prayer-text p    { font-size: 0.92rem; line-height: 1.68; }
+  .meditation h3    { font-size: 0.9rem; }
+  .meditation .fruit{ font-size: 0.8rem; }
+  .meditation p:last-child { font-size: 0.84rem; }
+
+  .prayer-nav       { margin-top: 0.45rem; gap: 0.45rem; }
+  .btn              { font-size: 0.92rem; padding: 0.72rem 0.9rem; }
+  .icon-btn         { width: 40px; height: 40px; font-size: 1rem; }
 }
+
+/* ===== DESKTOP — 1024 px and above ===== */
+
+@media (min-width: 1024px) {
+
+  /* Wider container */
+  #app {
+    max-width: 1400px;
+    padding: 1.25rem 3rem;
+  }
+
+  /* Home: two-column grid */
+  #screen-home {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      "header    header"
+      "suggested mysteries"
+      "footer    footer";
+    column-gap: 3rem;
+    row-gap: 0.5rem;
+    overflow: hidden;
+  }
+
+  .home-header     { grid-area: header; padding: 1rem 1rem 0.5rem; }
+  .home-header h1  { font-size: 2.75rem; }
+  .cross-icon      { font-size: 2.25rem; }
+  .tagline         { font-size: 1.05rem; }
+
+  .suggested-card  {
+    grid-area: suggested;
+    margin: 0;
+    align-self: start;
+    padding: 1.75rem 1.5rem;
+  }
+  .suggested-card h2 { font-size: 1.7rem; }
+
+  .mysteries-grid  {
+    grid-area: mysteries;
+    min-height: 0;
+    overflow-y: auto;
+  }
+  .mysteries-grid h3 { margin-top: 0; }
+  .cards           { grid-template-columns: repeat(2, 1fr); gap: 0.9rem; }
+  .mystery-card    { padding: 1.1rem 1rem; }
+  .mystery-card .icon { font-size: 1.6rem; }
+  .mystery-card .name { font-size: 1rem; }
+  .mystery-card .days { font-size: 0.82rem; }
+
+  .home-footer     { grid-area: footer; padding: 0.4rem 1rem; font-size: 0.9rem; }
+
+  /* Prayer screen: two-column grid */
+  #screen-prayer.active {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-areas:
+      "header   header"
+      "rosary   progress"
+      "rosary   content"
+      "rosary   nav";
+    column-gap: 2.5rem;
+    row-gap: 0.5rem;
+  }
+
+  .prayer-header    { grid-area: header; padding: 0.5rem 0 0.75rem; }
+  .prayer-title h2  { font-size: 1.3rem; }
+
+  /* Rosary panel: vertical bead flow */
+  .rosary-visual {
+    grid-area: rosary;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+    gap: 7px;
+    margin: 0;
+    padding: 1.25rem 0.75rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .bead             { width: 14px; height: 14px; }
+  .bead.pater       { width: 18px; height: 18px; }
+
+  .progress-container { grid-area: progress; margin-bottom: 0; }
+  .prayer-content   { grid-area: content; }
+  .prayer-nav       { grid-area: nav; margin-top: 0; }
+
+  .prayer-text p    { font-size: 1.1rem; }
+  .meditation h3    { font-size: 1.05rem; }
+  .meditation .fruit{ font-size: 0.92rem; }
+  .meditation p:last-child { font-size: 0.95rem; }
+}
+
+/* ===== WIDE DESKTOP — 1440 px and above ===== */
+
+@media (min-width: 1440px) {
+  #app { padding: 1.5rem 4rem; }
+
+  #screen-prayer.active {
+    grid-template-columns: 420px 1fr;
+    column-gap: 3.5rem;
+  }
+
+  .prayer-text p    { font-size: 1.18rem; }
+}
+
+/* ===== DARK MODE ===== */
 
 @media (prefers-color-scheme: dark) {
   :root {
